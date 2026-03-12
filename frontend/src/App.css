@@ -1,38 +1,158 @@
 .App {
+  font-family: sans-serif;
+}
+
+.header-style {
+  margin: 10px 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #aaa;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: 0;
+  gap: 20px;
+}
+
+.logout_button-style {
+  font-size: 32px;
+  height: 60px;
+  margin: auto;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: #ffab40;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.TODO_register {
+  margin: 10px 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: right;
+}
+
+.register_button-style {
+  font-size: 32px;
+  height: 60px;
+  margin: auto;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: #aaa;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.empty_message {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.todo_items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.todo_item {
+  margin-left: 50px;
+  border: 1px solid #ccc;
+  padding: 8px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  width: 250px;
+}
+
+.image {
+  width: 250px;
+  height: 250px;  
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  width: 250px;
+  height: 250px;
+  background-color: #ccc;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: #666;
+}
+
+.todo_btn {
+  display: flex;
+  justify-content: right;
+  gap: 8px;
+}
+
+.btn_edit {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-color: #f0f0f0;
+}
+
+.btn_delete {
+  background-color: red;
   color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.popUp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn_PopUp {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn_cancel {
+  width: 100px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border-color: black;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn_ok {
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  color: white;
+  border-color: red;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
 }
