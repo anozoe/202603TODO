@@ -1,38 +1,249 @@
-.App {
-  text-align: center;
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#f7f7f7;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  box-sizing:border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.auth-container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.auth-box{
+  width:420px;
+  background:white;
+  padding:36px;
+  border-radius:10px;
+  border-top:8px solid #aaa;
+  box-shadow:0 0 10px rgba(0,0,0,0.15);
 }
 
-.App-link {
-  color: #61dafb;
+.auth-title{
+  text-align:center;
+  font-size:30px;
+  margin-bottom:10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.auth-subtitle{
+  text-align:center;
+  font-size:14px;
+  color:#666;
+  margin-bottom:15px;
 }
+
+.password-rule{
+  font-size:13px;
+  color:#666;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+
+.input-group{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:18px;
+}
+
+.input-group label{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.input-group input{
+  height:42px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  padding:0 10px;
+  font-size:15px;
+}
+
+.input-group input:focus{
+  outline:none;
+  border-color:#ffab40;
+  box-shadow:0 0 0 2px rgba(255,171,64,0.2);
+}
+
+.error-text{
+  color:red;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.main-button{
+  width:100%;
+  height:46px;
+  border:none;
+  border-radius:8px;
+  background:#aaa;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.main-button:hover{
+  background:#888;
+}
+
+.link-area{
+  text-align:center;
+  margin-top:20px;
+}
+
+.sub-link{
+  color:#ff8c00;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.sub-link:hover{
+  text-decoration:underline;
+}
+
+.page-container{
+  display:flex;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+.mypage-box{
+  width:720px;
+}
+
+.page-title{
+  font-size:56px;
+  margin-bottom:10px;
+}
+
+.page-sub{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:40px;
+}
+
+.profile-card{
+  border:1px solid #ccc;
+  background:white;
+  padding:15px;
+  margin-bottom:18px;
+  border-radius:6px;
+}
+
+.profile-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.profile-text{
+  font-size:24px;
+}
+
+.profile-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.profile-input{
+  width:300px;
+  height:40px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  padding:0 10px;
+}
+
+.sub-action-button{
+  padding:8px 16px;
+  border:none;
+  border-radius:8px;
+  background:#aaa;
+  color:white;
+  cursor:pointer;
+}
+
+.sub-action-button:hover{
+  background:#888;
+}
+
+.update-button{
+  padding:8px 16px;
+  border:none;
+  border-radius:8px;
+  background:#555;
+  color:white;
+  cursor:pointer;
+}
+
+.update-button:hover{
+  background:#333;
+}
+
+.task-list{
+  margin-top:40px;
+}
+
+.task-card{
+  border:1px solid #ccc;
+  border-radius:16px;
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.task-left{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.task-left h3{
+  margin:0;
+  font-size:24px;
+}
+
+.task-meta{
+  color:#777;
+  font-size:14px;
+}
+
+.task-actions{
+  display:flex;
+  gap:10px;
+}
+
+.btn_edit{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#aaa;
+  color:white;
+  cursor:pointer;
+}
+
+.btn_edit:hover{
+  background:#888;
+}
+
+.btn_delete{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:red;
+  color:white;
+  cursor:pointer;
+}
+
+.btn_delete:hover{
+  background:#cc0000;
+}
+

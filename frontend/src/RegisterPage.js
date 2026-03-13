@@ -1,0 +1,184 @@
+import "./App.css";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+function RegisterPage() {
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [nameError, setNameError] = useState("");
+  const [mailError, setMailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const nameRegex = /^[A-Za-z0-9_]+$/;
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  const isValidPassword = (value) => {
+    if (value.length < 8) return false;
+
+    const hasLetter = /[A-Za-z]/.test(value);
+    const hasNumber = /[0-9]/.test(value);
+    const hasSymbol = /[^A-Za-z0-9]/.test(value);
+
+    const typeCount = [hasLetter, hasNumber, hasSymbol].filter(Boolean).length;
+
+    return typeCount >= 2;
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    setNameError("");
+    setMailError("");
+    setPasswordError("");
+
+    let valid = true;
+
+    // 名前
+    if (!userName) {
+      setNameError("名前は必須です");
+      valid = false;
+    } else if (userName.length > 50) {
+      setNameError("文字数上限を超えています");
+      valid = false;
+    } else if (!nameRegex.test(userName)) {
+      setNameError("正しい名前を入力してください");
+      valid = false;
+    }
+
+    // メール
+    if (!email) {
+      setMailError("メールアドレスは必須です");
+      valid = false;
+    } else if (email.length > 50) {
+      setMailError("文字数上限を超えています");
+      valid = false;
+    } else if (!emailRegex.test(email)) {
+      setMailError("正しいメールアドレスを入力してください");
+      valid = false;
+    }
+
+    // パスワード
+    if (!password) {
+      setPasswordError("パスワードは必須です");
+      valid = false;
+    } else if (password.length > 50) {
+      setPasswordError("文字数上限を超えています");
+      valid = false;
+    } else if (!isValidPassword(password)) {
+      setPasswordError("正しいパスワードを入力してください");
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    alert("ユーザ登録成功");
+
+    navigate("/");
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-box">
+
+        <h1 className="auth-title">新規会員登録</h1>
+
+        <p className="auth-subtitle">
+          名前、メールアドレス、パスワードを入力してください
+        </p >
+
+        <p className="password-rule">
+          ※パスワードは8文字以上で入力してください。<br/>
+          英字・数字・記号のうち2種類以上を含める必要があります。
+        </p >
+
+        <form onSubmit={handleRegister}>
+
+          {/* ユーザ名 */}
+          <div className="input-group">
+            <label htmlFor="user_name">ユーザ名</label>
+
+            <input
+              id="user_name"
+              type="text"
+              maxLength="50"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+
+            {nameError && (
+              <p id="name_error_message" className="error-text">
+                {nameError}
+              </p >
+            )}
+          </div>
+
+          {/* メール */}
+          <div className="input-group">
+            <label htmlFor="email">メールアドレス</label>
+
+            <input
+              id="email"
+              type="text"
+              maxLength="50"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            {mailError && (
+              <p id="mail_error_message" className="error-text">
+                {mailError}
+              </p >
+            )}
+          </div>
+
+          {/* パスワード */}
+          <div className="input-group">
+            <label htmlFor="password">パスワード</label>
+
+            <input
+              id="password"
+              type="password"
+              maxLength="50"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            {passwordError && (
+              <p id="password_error_message" className="error-text">
+                {passwordError}
+              </p >
+            )}
+          </div>
+
+          {/* 登録ボタン */}
+          <button
+            id="register_button"
+            type="submit"
+            className="main-button"
+          >
+            登録
+          </button>
+
+        </form>
+
+        {/* ログイン画面へ */}
+        <div className="link-area">
+          <Link
+            id="to_login_link"
+            to="/"
+            className="sub-link"
+          >
+            ログイン画面はこちら
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+export default RegisterPage;
