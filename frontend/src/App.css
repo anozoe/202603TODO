@@ -389,3 +389,58 @@ body{
   font-weight: bold;
   cursor: pointer;
 }
+
+.user_name_link{
+  cursor:pointer;
+}
+
+.user_name_link:hover{
+  text-decoration:underline;
+}
+
+.mypage-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+}
+
+.page-title{
+  font-size:32px;
+  margin:0;
+}
+
+.mypage-box{
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.mypage-header button{
+  margin-left:auto;
+}
+
+.page-title {
+  font-size: 40px;
+  margin: 0 0 16px;
+}
+
+.todo-top-button-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+
+.todo-top-button {
+  width: 150px;
+  height: 48px;
+  font-size: 18px;
+  margin: 0;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 150px;
+  gap: 10px;
+}

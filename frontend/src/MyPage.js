@@ -52,6 +52,15 @@ function MyPage() {
       <div className="mypage-box">
         <h1 className="page-title">マイページ</h1>
 
+        <div className="todo-top-button-row">
+          <button
+            className="register_button-style todo-top-button"
+            onClick={() => navigate("/todo")}
+          >
+            TODO一覧
+          </button>
+        </div>
+
         <div className="profile-card">
           <div className="profile-row">
             {editingUserName ? (
