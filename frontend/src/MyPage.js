@@ -1,24 +1,52 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function MyPage() {
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState("XXXXX");
-  const [email, setEmail] = useState("example@mail.com");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const [editingUserName, setEditingUserName] = useState(false);
   const [editingEmail, setEditingEmail] = useState(false);
 
-  const [userNameInput, setUserNameInput] = useState(userName);
-  const [emailInput, setEmailInput] = useState(email);
+  const [userNameInput, setUserNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
 
   const [todos, setTodos] = useState([
     { id: 1, title: "title_1", description: "text" },
     { id: 2, title: "title_2", description: "text" },
     { id: 3, title: "title_3", description: "text" }
   ]);
+
+  useEffect(() => {
+    const loginUserId = localStorage.getItem("loginUserId");
+
+    if (!loginUserId) {
+      alert("ログイン情報がありません");
+      navigate("/");
+      return;
+    }
+
+    fetch(`http://localhost:8080/api/users/${loginUserId}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("ユーザー情報の取得に失敗しました");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setUserName(data.user_name);
+        setEmail(data.email);
+        setUserNameInput(data.user_name);
+        setEmailInput(data.email);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("ユーザー情報の取得に失敗しました");
+      });
+  }, [navigate]);
 
   const handleUserNameEdit = () => {
     setEditingUserName(true);

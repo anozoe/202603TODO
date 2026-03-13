@@ -28,7 +28,7 @@ function RegisterPage() {
     return typeCount >= 2;
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     setNameError("");
@@ -75,15 +75,40 @@ function RegisterPage() {
 
     if (!valid) return;
 
-    alert("ユーザ登録成功");
+    try {
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          user_name: userName,
+          email: email,
+          password: password
+        })
+      });
 
-    navigate("/");
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("登録失敗:", errorText);
+        alert("ユーザ登録に失敗しました");
+        return;
+      }
+
+      const data = await response.json();
+      console.log("登録成功:", data);
+
+      alert("ユーザ登録成功");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("サーバーに接続できません");
+    }
   };
 
   return (
     <div className="auth-container">
       <div className="auth-box">
-
         <h1 className="auth-title">新規会員登録</h1>
 
         <p className="auth-subtitle">
@@ -91,13 +116,11 @@ function RegisterPage() {
         </p >
 
         <p className="password-rule">
-          ※パスワードは8文字以上で入力してください。<br/>
+          ※パスワードは8文字以上で入力してください。<br />
           英字・数字・記号のうち2種類以上を含める必要があります。
         </p >
 
         <form onSubmit={handleRegister}>
-
-          {/* ユーザ名 */}
           <div className="input-group">
             <label htmlFor="user_name">ユーザ名</label>
 
@@ -116,7 +139,6 @@ function RegisterPage() {
             )}
           </div>
 
-          {/* メール */}
           <div className="input-group">
             <label htmlFor="email">メールアドレス</label>
 
@@ -135,7 +157,6 @@ function RegisterPage() {
             )}
           </div>
 
-          {/* パスワード */}
           <div className="input-group">
             <label htmlFor="password">パスワード</label>
 
@@ -154,7 +175,6 @@ function RegisterPage() {
             )}
           </div>
 
-          {/* 登録ボタン */}
           <button
             id="register_button"
             type="submit"
@@ -162,10 +182,8 @@ function RegisterPage() {
           >
             登録
           </button>
-
         </form>
 
-        {/* ログイン画面へ */}
         <div className="link-area">
           <Link
             id="to_login_link"
@@ -175,7 +193,6 @@ function RegisterPage() {
             ログイン画面はこちら
           </Link>
         </div>
-
       </div>
     </div>
   );

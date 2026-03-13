@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -17,7 +16,7 @@ function LoginPage() {
     return regex.test(value);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     setMailError("");
@@ -25,13 +24,11 @@ function LoginPage() {
 
     let valid = true;
 
-    // メールチェック
     if (!isValidEmail(email)) {
       setMailError("メールアドレスは不正です");
       valid = false;
     }
 
-    // パスワードチェック
     if (!password) {
       setPasswordError("パスワードは不正です");
       valid = false;
@@ -39,24 +36,46 @@ function LoginPage() {
 
     if (!valid) return;
 
-    // 仮ログイン
-    if (email === "test@test.com" && password === "abc123!@") {
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+
+      if (!response.ok) {
+        setMailError("メールアドレスまたはパスワードが違います");
+        setPasswordError("メールアドレスまたはパスワードが違います");
+        return;
+      }
+
+      const data = await response.json();
+
+      // localStorage に保存
+      localStorage.setItem("loginUserId", data.id);
+      localStorage.setItem("loginUserName", data.user_name);
+      localStorage.setItem("loginUserEmail", data.email);
+
+      console.log("ログイン成功:", data);
+
       navigate("/todo");
-    } else {
-      setMailError("メールアドレスは不正です");
-      setPasswordError("パスワードは不正です");
+    } catch (error) {
+      console.error(error);
+      setMailError("サーバーに接続できません");
     }
   };
 
   return (
     <div className="auth-container">
       <div className="auth-box">
-
         <h1 className="auth-title">ログイン</h1>
 
         <form onSubmit={handleLogin}>
-
-          {/* メールアドレス */}
           <div className="input-group">
             <label htmlFor="email">メールアドレス</label>
 
@@ -76,7 +95,6 @@ function LoginPage() {
             )}
           </div>
 
-          {/* パスワード */}
           <div className="input-group">
             <label htmlFor="password">パスワード</label>
 
@@ -96,7 +114,6 @@ function LoginPage() {
             )}
           </div>
 
-          {/* ログインボタン */}
           <button
             id="login_button"
             type="submit"
@@ -104,10 +121,8 @@ function LoginPage() {
           >
             ログイン
           </button>
-
         </form>
 
-        {/* ユーザ登録リンク */}
         <div className="link-area">
           <Link
             id="to_register_link"
@@ -117,7 +132,6 @@ function LoginPage() {
             新規会員登録はこちら
           </Link>
         </div>
-
       </div>
     </div>
   );
