@@ -56,9 +56,8 @@ function LoginPage() {
 
       const data = await response.json();
 
-      // localStorage に保存
       localStorage.setItem("loginUserId", data.id);
-      localStorage.setItem("loginUserName", data.user_name);
+      localStorage.setItem("loginUserName", data.userName);
       localStorage.setItem("loginUserEmail", data.email);
 
       console.log("ログイン成功:", data);

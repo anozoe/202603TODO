@@ -26,8 +26,8 @@ public class TodoController {
         return ResponseEntity.ok(todos);
     }
 
-    /*特定ユーザTODO一覧取得GET /api/todos/user/{userId}*/
-    @GetMapping("/user/{userId}")
+    /*特定ユーザTODO一覧取得GET /api/todos/user/{Id}*/
+    @GetMapping("/api/todos/user/{Id}")
     public ResponseEntity<List<Todo>> getTodosByUserId(@PathVariable Integer userId) {
         List<Todo> todos = todoService.getTodosByUserId(userId);
         return ResponseEntity.ok(todos);
@@ -41,7 +41,7 @@ public class TodoController {
     }
 
     /*TODO更新PUT /api/todos/{id}*/
-    @PutMapping("/{id}")
+    @PutMapping("/api/todos/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable Integer id, @RequestBody Todo todo) {
 
         Todo updatedTodo = todoService.updateTodo(id, todo);
@@ -54,7 +54,7 @@ public class TodoController {
     }
 
     /*TODO削除DELETE /api/todos/{id}*/
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/todos/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Integer id) {
 
         boolean deleted = todoService.deleteTodo(id);
