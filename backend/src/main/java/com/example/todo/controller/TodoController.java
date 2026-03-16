@@ -10,7 +10,7 @@ import com.example.todo.entity.Todo;
 import com.example.todo.service.TodoService;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/api/todos")
 @CrossOrigin
 public class TodoController {
 
@@ -32,48 +32,5 @@ public class TodoController {
     public ResponseEntity<List<Todo>> getTodosByUserId(@PathVariable Integer userId) {
         List<Todo> todos = todoService.getTodosByUserId(userId);
         return ResponseEntity.ok(todos);
-    }
-
-    // TODO詳細取得
-    @GetMapping("/{id}")
-    public ResponseEntity<Todo> getTodoById(@PathVariable Integer id) {
-        Todo todo = todoService.getTodoById(id);
-
-        if (todo == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(todo);
-    }
-
-    // TODO登録
-    @PostMapping
-    public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
-        Todo createdTodo = todoService.createTodo(todo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
-    }
-
-    // TODO更新
-    @PutMapping("/{id}")
-    public ResponseEntity<Todo> updateTodo(@PathVariable Integer id, @RequestBody Todo todo) {
-        Todo updatedTodo = todoService.updateTodo(id, todo);
-
-        if (updatedTodo == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(updatedTodo);
-    }
-
-    // TODO削除
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable Integer id) {
-        boolean deleted = todoService.deleteTodo(id);
-
-        if (!deleted) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.noContent().build();
     }
 }
