@@ -10,7 +10,7 @@ import com.example.todo.entity.Todo;
 import com.example.todo.service.TodoService;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/api/todos")
 @CrossOrigin
 public class TodoController {
 
