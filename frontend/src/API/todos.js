@@ -1,9 +1,9 @@
 const BASE_URL = ``;
 // const TODOS_URL = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=1000001';
-const TODOS_URL = `${BASE_URL}/api/todos`;
+const TODOS_URL = `http://localhost:8080/todos`;
 
 export const getTodos = async () => {
-    fetch(TODOS_URL)
+    return fetch(TODOS_URL)
         .then(response => response.json())
         .then(data => {
             return data
@@ -26,4 +26,3 @@ export const deleteTodo = async (id) => {
       })
 };
 
-export const registerTodo = 

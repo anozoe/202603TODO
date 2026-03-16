@@ -99,7 +99,7 @@ function TodoEditNew() {
             <br />
             <div className='btn_bottom'>
                 <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/todo')}
                     className='btn_back'
                 >戻る</button>
                 <button
