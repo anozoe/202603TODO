@@ -10,51 +10,53 @@ import com.example.todo.dto.user.UserResponse;
 import com.example.todo.dto.user.UserUpdateRequest;
 import com.example.todo.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
+    /*ユーザー取得GET /api/users/{id}*/
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
+
         UserResponse response = userService.getUserById(id);
 
         if (response == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("ユーザーが見つかりません。");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         return ResponseEntity.ok(response);
     }
 
+    /*ユーザー登録POST /api/users/register*/
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserRegisterRequest request) {
+    public ResponseEntity<UserRegisterResponse> register(
+            @RequestBody UserRegisterRequest request) {
+
         UserRegisterResponse response = userService.register(request);
 
         if (response == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("入力内容が不正です。");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    /*ユーザー更新PUT /api/users/{id}*/
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(
+    public ResponseEntity<UserResponse> updateUser(
             @PathVariable Integer id,
             @RequestBody UserUpdateRequest request) {
 
         UserResponse response = userService.updateUser(id, request);
 
         if (response == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("ユーザー更新に失敗しました。");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
         return ResponseEntity.ok(response);
