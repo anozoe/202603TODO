@@ -31,6 +31,7 @@ const [todos, setTodos] = useState([]);
 useEffect(() => {
   const fetchTodos = async () => {
     const data = await getTodos();
+    console.log(data);  
     const mapped = data.map(todo => ({
       id: todo.id,
       title: todo.title,

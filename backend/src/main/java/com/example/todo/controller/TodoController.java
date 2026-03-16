@@ -6,8 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.todo.dto.todo.TodoRequest;
 import com.example.todo.entity.Todo;
 import com.example.todo.service.TodoService;
+
+import jakarta.validation.Valid;
+
+
+
+
+
 
 @RestController
 @RequestMapping("/api/todos")
@@ -33,4 +41,20 @@ public class TodoController {
         List<Todo> todos = todoService.getTodosByUserId(userId);
         return ResponseEntity.ok(todos);
     }
+
+    //TODO新規登録
+    @PostMapping
+    public ResponseEntity<Todo> createTodo(@Valid TodoRequest todo) {
+        Todo createdTodo = todoService.createTodo(todo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
+    }
+    
+    //TODO更新
+    @PutMapping("/{id}")
+    public ResponseEntity<Todo> updateTodo(@PathVariable Integer id, @RequestBody Todo updatedTodo) {
+        Todo upTodo = todoService.updateTodo(id, updatedTodo);
+        return ResponseEntity.ok(upTodo); // 簡単に200 OKでデータを返す
+    }
+
+    
 }

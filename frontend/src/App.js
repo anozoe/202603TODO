@@ -9,7 +9,8 @@ import Todoitem from './components/Todoitem';
 import testImage from './assets/test.png';
 import { getTodos } from './API/todos';  
 import TodoList from './pages/TodoList';
-import TodoEditNew from './pages/TodoEditNew';
+import TodoNew from './pages/TodoNew';
+import TodoEdit from './pages/TodoEdit';
 
 
 function App() {
@@ -35,7 +36,9 @@ function App() {
         <Header />
 
         <div className="TODO_register">
-          <button className="register_button-style">新規登録</button>
+          <button 
+            className="register_button-style"
+          >新規登録</button>
         </div>
 
         <br />
@@ -66,7 +69,8 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/todo" element={<TodoList />} />
       <Route path="/mypage" element={<MyPage todos={todos} setTodos={setTodos} />} />
-      <Route path='/new' element={<TodoEditNew />} />
+      <Route path='/new' element={<TodoNew />} />
+      <Route path='/edit' element={<TodoEdit/>} />
     </Routes>
   );
 }

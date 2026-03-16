@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react'
 import Header from '../components/Header'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { updateTodo } from '../API/todos';
 
 
-function TodoEditNew() {
+function TodoEdit() {
+    const location = useLocation();
+    const todo = location.state;
     const navigate = useNavigate();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(todo.title);
+    const [description, setDescription] = useState(todo.description);
     const [titleError, setTitleError] = useState(false);
     const [titleEmpty, setTitleEmpty] = useState(false);
     const [descError, setDescError] = useState(false);
@@ -21,7 +24,7 @@ function TodoEditNew() {
         setImagePreview(URL.createObjectURL(file));
     };
 
-    const handleRegister = () => {
+    const handleUpdate = async () => {
         if (title === '') {
             setTitleEmpty(true);
         }
@@ -30,8 +33,19 @@ function TodoEditNew() {
         }
         if (title === '' || description === '') {
             return;
+        } 
+        const newTodo = {
+            id: todo.id,
+            userId: 1, //←　仮の値
+            title: title,
+            description: description,
+            // image: imageFile
         }
-    }
+        const result = await updateTodo(todo.id, newTodo);
+        navigate('/todo')
+    };
+    
+
   return (
     <div>
         <Header />
@@ -103,7 +117,7 @@ function TodoEditNew() {
                     className='btn_back'
                 >戻る</button>
                 <button
-                    onClick={handleRegister}
+                    onClick={handleUpdate}
                     className='btn_register'
                 >登録</button>
             </div>
@@ -112,4 +126,4 @@ function TodoEditNew() {
   )
 }
 
-export default TodoEditNew
+export default TodoEdit

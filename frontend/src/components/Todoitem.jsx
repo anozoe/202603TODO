@@ -24,7 +24,7 @@ const Todoitem = ({ todo }) => {
         <div className='todo_btn'>
           <button 
             className='btn_edit'
-            onClick={() => navigate('/new')}
+            onClick={() => navigate('/edit', {state: todo})}
           >
             編集
           </button>
