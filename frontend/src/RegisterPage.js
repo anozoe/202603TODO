@@ -37,7 +37,6 @@ function RegisterPage() {
 
     let valid = true;
 
-    // 名前
     if (!userName) {
       setNameError("名前は必須です");
       valid = false;
@@ -49,7 +48,6 @@ function RegisterPage() {
       valid = false;
     }
 
-    // メール
     if (!email) {
       setMailError("メールアドレスは必須です");
       valid = false;
@@ -61,7 +59,6 @@ function RegisterPage() {
       valid = false;
     }
 
-    // パスワード
     if (!password) {
       setPasswordError("パスワードは必須です");
       valid = false;
@@ -82,7 +79,7 @@ function RegisterPage() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          user_name: userName,
+          userName: userName,
           email: email,
           password: password
         })

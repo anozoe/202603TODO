@@ -4,9 +4,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.todo.dto.auth.LoginRequest;
 import com.example.todo.dto.auth.LoginResponse;
+import com.example.todo.entity.User;
+import com.example.todo.repository.UserRepository;
 
 @Service
 public class AuthService {
+
+    private final UserRepository userRepository;
+
+    public AuthService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public LoginResponse login(LoginRequest request) {
 
@@ -16,12 +24,20 @@ public class AuthService {
             return null;
         }
 
-        // 仮ログイン用
-        if ("test@example.com".equals(request.getEmail())
-                && "password123".equals(request.getPassword())) {
-            return new LoginResponse(1, "テストユーザー", "test@example.com");
+        User user = userRepository.findByEmail(request.getEmail()).orElse(null);
+
+        if (user == null) {
+            return null;
         }
 
-        return null;
+        if (!user.getPassword().equals(request.getPassword())) {
+            return null;
+        }
+
+        return new LoginResponse(
+                user.getId(),
+                user.getUserName(),
+                user.getEmail()
+        );
     }
 }
