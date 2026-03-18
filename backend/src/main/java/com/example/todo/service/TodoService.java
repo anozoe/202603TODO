@@ -2,8 +2,11 @@ package com.example.todo.service;
 
 import java.util.List;
 
+import javax.swing.text.html.parser.Entity;
+
 import org.springframework.stereotype.Service;
 
+import com.example.todo.dto.todo.TodoRequest;
 import com.example.todo.entity.Todo;
 import com.example.todo.repository.TodoRepository;
 
@@ -28,7 +31,12 @@ public class TodoService {
         return todoRepository.findById(id).orElse(null);
     }
 
-    public Todo createTodo(Todo todo) {
+    public Todo createTodo(TodoRequest request) {
+        Todo todo =  new Todo();
+        todo.setUserId(request.getUserId());
+        todo.setTitle(request.getTitle());
+        todo.setDescription(request.getDescription());
+        todo.setImage(request.getImage());
         return todoRepository.save(todo);
     }
 

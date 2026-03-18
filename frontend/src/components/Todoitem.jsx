@@ -1,12 +1,13 @@
 import '../App.css'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Todoitem = ({ todo }) => {
     const [isPopUpVisible, setPopUpVisible] = useState(false);
     const togglePopUp = () => {
         setPopUpVisible(!isPopUpVisible);
     };
-
+    const navigate = useNavigate();
   return (
     <div>
       <div className='todo_item'>
@@ -21,7 +22,10 @@ const Todoitem = ({ todo }) => {
         <p>{todo.title}</p>
         <p>{todo.description}</p>
         <div className='todo_btn'>
-          <button className='btn_edit'>
+          <button 
+            className='btn_edit'
+            onClick={() => navigate('/edit', {state: todo})}
+          >
             編集
           </button>
           <button onClick={togglePopUp}
